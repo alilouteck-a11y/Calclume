@@ -171,3 +171,11 @@ Chronological record of significant project decisions.
 **Decision:** Document Hostinger static hosting against `out/` only; no automatic deploy without explicit authorization.
 
 **Rationale:** Matches `output: "export"` architecture and keeps production uploads intentional.
+
+---
+
+## 2026-09-01 — Phase 2.4 React Testing Library cleanup in navigation tests
+
+**Decision:** Always call Testing Library `cleanup()` in `afterEach` for suites that `render()` React components, including navigation tests.
+
+**Rationale:** Without cleanup, React 19’s scheduler can run after jsdom teardown (`window is not defined`), causing Vitest to exit 1 even when all assertions pass.

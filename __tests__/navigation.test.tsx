@@ -1,8 +1,12 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { footerNavRoutes, primaryNavRoutes } from "@/lib/routes";
+
+afterEach(() => {
+  cleanup();
+});
 
 function normalizeHref(href: string | null): string {
   if (!href) {
