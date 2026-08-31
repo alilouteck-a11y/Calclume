@@ -187,3 +187,11 @@ Chronological record of significant project decisions.
 **Decision:** PROCEED WITH CONDITIONS on a combined **Outlier and IQR Calculator** at `/calculators/statistics/outlier-iqr/`, including five-number summary, Tukey fences, outlier listing, and accessible box plot on one page. Do not ship a separate competing five-number-summary route in the next implementation phase. Defer CV, SEM, and critical-value tools.
 
 **Rationale:** Live SERP evidence shows calculator intent across overlapping EDA queries; combining avoids cannibalization; NIST/OpenStax support fences and five-number/box-plot teaching; differentiation is credible via explicit quartile conventions and CalcLume’s transparent local-only UX. Exact keyword volumes remain unverified pending SEO tools/Search Console.
+
+---
+
+## 2026-09-01 — Phase 3.1 Outlier/IQR mathematical conventions
+
+**Decision:** Default quartile method **`exclusive-halves`** (median of halves, exclude middle when odd). Alternate **`excel-r7`** (Excel PERCENTILE.INC / Hyndman–Fan type 7). Default fence multiplier **1.5×IQR**; optional **3.0×IQR**. Minimum **4** observations; maximum **1000** via shared parser. Outlier classification uses strict `<` / `>` (values on fences are not outliers). Whiskers at extreme non-outlier observations. Reuse `parseDataset()` unchanged. Accessible box plot via inline SVG + textual summary.
+
+**Rationale:** Exclusive halves matches OpenStax verified examples and Langford Method 2 / Moore & McCabe teaching; Excel alternate covers spreadsheet users without multiplying quantile options; n ≥ 4 avoids degenerate empty-half quartiles; strict fence boundaries are reproducible without arbitrary epsilon.
