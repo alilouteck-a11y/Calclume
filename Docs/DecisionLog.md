@@ -179,3 +179,11 @@ Chronological record of significant project decisions.
 **Decision:** Always call Testing Library `cleanup()` in `afterEach` for suites that `render()` React components, including navigation tests.
 
 **Rationale:** Without cleanup, React 19’s scheduler can run after jsdom teardown (`window is not defined`), causing Vitest to exit 1 even when all assertions pass.
+
+---
+
+## 2026-09-01 — Phase 3.0 second calculator selection
+
+**Decision:** PROCEED WITH CONDITIONS on a combined **Outlier and IQR Calculator** at `/calculators/statistics/outlier-iqr/`, including five-number summary, Tukey fences, outlier listing, and accessible box plot on one page. Do not ship a separate competing five-number-summary route in the next implementation phase. Defer CV, SEM, and critical-value tools.
+
+**Rationale:** Live SERP evidence shows calculator intent across overlapping EDA queries; combining avoids cannibalization; NIST/OpenStax support fences and five-number/box-plot teaching; differentiation is credible via explicit quartile conventions and CalcLume’s transparent local-only UX. Exact keyword volumes remain unverified pending SEO tools/Search Console.
