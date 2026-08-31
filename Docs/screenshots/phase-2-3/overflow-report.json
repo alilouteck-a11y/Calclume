@@ -1,0 +1,183 @@
+{
+  "findings": [
+    {
+      "width": 320,
+      "page": "home",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    {
+      "width": 320,
+      "page": "mad",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    {
+      "width": 320,
+      "page": "methodology",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    {
+      "width": 320,
+      "page": "privacy",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    {
+      "width": 320,
+      "page": "not-found",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    {
+      "width": 390,
+      "page": "home",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    {
+      "width": 390,
+      "page": "mad",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    {
+      "width": 390,
+      "page": "methodology",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    {
+      "width": 390,
+      "page": "privacy",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    {
+      "width": 390,
+      "page": "not-found",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    {
+      "width": 768,
+      "page": "home",
+      "overflow": false,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    {
+      "width": 768,
+      "page": "mad",
+      "overflow": false,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    {
+      "width": 768,
+      "page": "methodology",
+      "overflow": false,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    {
+      "width": 768,
+      "page": "privacy",
+      "overflow": false,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    {
+      "width": 768,
+      "page": "not-found",
+      "overflow": false,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    {
+      "width": 1024,
+      "page": "home",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "clientWidth": 1024
+    },
+    {
+      "width": 1024,
+      "page": "mad",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "clientWidth": 1024
+    },
+    {
+      "width": 1024,
+      "page": "methodology",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "clientWidth": 1024
+    },
+    {
+      "width": 1024,
+      "page": "privacy",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "clientWidth": 1024
+    },
+    {
+      "width": 1024,
+      "page": "not-found",
+      "overflow": false,
+      "scrollWidth": 1024,
+      "clientWidth": 1024
+    },
+    {
+      "width": 1280,
+      "page": "home",
+      "overflow": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280
+    },
+    {
+      "width": 1280,
+      "page": "mad",
+      "overflow": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280
+    },
+    {
+      "width": 1280,
+      "page": "methodology",
+      "overflow": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280
+    },
+    {
+      "width": 1280,
+      "page": "privacy",
+      "overflow": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280
+    },
+    {
+      "width": 1280,
+      "page": "not-found",
+      "overflow": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280
+    }
+  ],
+  "keyboard": {
+    "skipHref": "#main-content",
+    "focusedCalculate": true
+  }
+}

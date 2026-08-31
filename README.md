@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CalcLume
 
-## Getting Started
+Clear calculators that show the work.
 
-First, run the development server:
+Production domain: [https://calclume.com](https://calclume.com)
+
+## Stack
+
+- Next.js 16 (App Router) with `output: "export"`
+- TypeScript (strict)
+- Tailwind CSS v4
+- Vitest
+
+Calculations run locally in the browser. There is no backend, database, authentication, analytics, or CMS in the current production build.
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Useful commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
 
-## Learn More
+`npm run build` writes a static site to `out/`.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Upload the contents of `out/` to a static host (for example Hostinger static hosting).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See:
 
-## Deploy on Vercel
+- `Docs/Phase2_3HostingerDeployment.md`
+- `Docs/Phase2_3PostDeploymentChecklist.md`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Do not deploy credentials, source maps with secrets, or the `Docs/` folder as a public product surface unless intentionally desired.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Published calculator
+
+- Mean Absolute Deviation: `/calculators/statistics/mean-absolute-deviation/`
+
+## License / contact
+
+Contact: hello@calclume.com
