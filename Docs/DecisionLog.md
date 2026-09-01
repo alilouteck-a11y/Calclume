@@ -195,3 +195,11 @@ Chronological record of significant project decisions.
 **Decision:** Default quartile method **`exclusive-halves`** (median of halves, exclude middle when odd). Alternate **`excel-r7`** (Excel PERCENTILE.INC / Hyndman–Fan type 7). Default fence multiplier **1.5×IQR**; optional **3.0×IQR**. Minimum **4** observations; maximum **1000** via shared parser. Outlier classification uses strict `<` / `>` (values on fences are not outliers). Whiskers at extreme non-outlier observations. Reuse `parseDataset()` unchanged. Accessible box plot via inline SVG + textual summary.
 
 **Rationale:** Exclusive halves matches OpenStax verified examples and Langford Method 2 / Moore & McCabe teaching; Excel alternate covers spreadsheet users without multiplying quantile options; n ≥ 4 avoids degenerate empty-half quartiles; strict fence boundaries are reproducible without arbitrary epsilon.
+
+---
+
+## 2026-09-01 — Phase 3.2 pure-engine validation and whisker invariant
+
+**Decision:** `calculateOutlierIqr()` validates count (4–1000), finite values, and supported method/multiplier at runtime independent of `parseDataset()`. Whisker endpoints use only non-outlier observations; empty non-outlier set throws (mathematically unreachable for valid inputs).
+
+**Rationale:** Defensive pure layer for direct numeric calls and tests; documented invariant replaces undocumented min/max whisker fallback.
