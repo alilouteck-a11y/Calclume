@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, type Ref } from "react";
 
 type DatasetInputProps = {
   label: string;
@@ -10,6 +10,7 @@ type DatasetInputProps = {
   error?: string;
   placeholder?: string;
   disabled?: boolean;
+  textareaRef?: Ref<HTMLTextAreaElement>;
 };
 
 export function DatasetInput({
@@ -20,6 +21,7 @@ export function DatasetInput({
   error,
   placeholder = "Enter values separated by commas",
   disabled = false,
+  textareaRef,
 }: DatasetInputProps) {
   const id = useId();
   const descriptionId = description ? `${id}-description` : undefined;
@@ -36,6 +38,7 @@ export function DatasetInput({
         </p>
       )}
       <textarea
+        ref={textareaRef}
         id={id}
         value={value}
         onChange={(event) => onChange(event.target.value)}

@@ -203,3 +203,35 @@ Chronological record of significant project decisions.
 **Decision:** `calculateOutlierIqr()` validates count (4–1000), finite values, and supported method/multiplier at runtime independent of `parseDataset()`. Whisker endpoints use only non-outlier observations; empty non-outlier set throws (mathematically unreachable for valid inputs).
 
 **Rationale:** Defensive pure layer for direct numeric calls and tests; documented invariant replaces undocumented min/max whisker fallback.
+
+---
+
+## 2026-09-02 — Phase 3.3 Outlier/IQR UI stale-result policy
+
+**Decision:** After a successful calculation, changing dataset text, quartile method, or fence multiplier keeps the last result visible with a stale notice and hides copy until recalculate. Changing display precision alone does not mark the result stale. Failed Calculate clears the snapshot.
+
+**Rationale:** Matches Phase 3.1 product contract; avoids losing context while making copy/export depend on current inputs.
+
+---
+
+## 2026-09-02 — Phase 3.3 observation-table expansion policy
+
+**Decision:** Render the first 100 classification-table rows when `n > 100`; provide expand/collapse in the UI only. New calculation and reset collapse the table. The engine always processes the full dataset.
+
+**Rationale:** Parity with MAD large-table UX; keeps DOM size bounded for 1,000-observation limit.
+
+---
+
+## 2026-09-02 — Phase 3.3 large-outlier-list expansion policy
+
+**Decision:** Show the first 20 lower or upper outliers per side when count exceeds 20; toggle `Show [k] more` / `Show first 20`. List entries use `index-value` keys so duplicate values remain distinct.
+
+**Rationale:** Implements Phase 3.1 contract; prevents long outlier lists from dominating the page while preserving per-observation identity.
+
+---
+
+## 2026-09-02 — Phase 3.3 accessible box plot approach
+
+**Decision:** Inline SVG box plot with `role="img"`, visible prose summary, `<desc>` duplication, and `sr-only` data table. Engine supplies `boxPlot.domainMin/Max`; coordinate mapping occurs only in the component. Fences use dashed strokes; median uses heavier stroke; outliers use labeled open circles. No chart library.
+
+**Rationale:** Locked in Phase 3.1; satisfies non-color-only and no-hover requirements while staying static-export friendly.
