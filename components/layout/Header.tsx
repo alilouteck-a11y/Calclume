@@ -138,7 +138,7 @@ export function Header({ searchIndex }: HeaderProps) {
 
   return (
     <>
-      <header className="border-b border-border bg-white">
+      <header aria-label="Site" className="border-b border-border bg-white">
         <Container>
           <div className="flex min-h-16 items-center justify-between gap-3 py-3">
             <Link

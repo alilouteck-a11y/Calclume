@@ -359,3 +359,11 @@ Chronological record of significant project decisions.
 **Decision:** Remove duplicate calculator-card surfaces — full cards only in homepage Featured and directory Available calculators; category discovery uses compact `CategorySummaryCard` with catalog-derived counts. Compress homepage How-it-works to a compact MAD preview with link to live calculator.
 
 **Rationale:** Visual review found repetition made the two-calculator library feel smaller and the homepage too long on mobile; deduplication preserves discovery without redundant cards.
+
+---
+
+## 2026-09-02 — Phase 4.2.1 shared navigation only
+
+**Decision:** All public pages must consume the single root-layout Phase 4.2 `Header` / `MobileNavDrawer`. Category links (including Statistics) do not belong in primary navigation at the current publication threshold (one published category).
+
+**Rationale:** Live audit confusion between breadcrumb Statistics and primary nav; preventing a second header implementation keeps static export shells identical across calculator pages.
