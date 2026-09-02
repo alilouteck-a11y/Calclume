@@ -1,16 +1,12 @@
-/** Slugs of calculators published as public routes and included in the sitemap. */
-export const publishedCalculatorRoutes = [
-  "/calculators/statistics/mean-absolute-deviation/",
-  "/calculators/statistics/outlier-iqr/",
-] as const;
+/**
+ * Backwards-compatible publication shim.
+ * Source of truth: lib/calculator-catalog.ts (via calculator-catalog-publication).
+ * Do not add a manually maintained published route list here.
+ */
 
-export type PublishedCalculatorRoute = (typeof publishedCalculatorRoutes)[number];
-
-export function isCalculatorPublished(slug: string): boolean {
-  return publishedCalculatorRoutes.some((route) => route.includes(slug));
-}
-
-export function getCalculatorHref(slug: string): string | undefined {
-  const route = publishedCalculatorRoutes.find((entry) => entry.includes(slug));
-  return route;
-}
+export {
+  getCalculatorHref,
+  isCalculatorPublished,
+  publishedCalculatorRoutes,
+  type PublishedCalculatorRoute,
+} from "@/lib/calculator-catalog-publication";

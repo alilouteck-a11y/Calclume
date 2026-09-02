@@ -293,3 +293,27 @@ Chronological record of significant project decisions.
 **Rationale:** Original Phase 4.0 batch lacked explicit IA, catalog, search, shell, a11y, SEO, and migration contracts; reconciliation maps every deliverable without duplicating shallow content. Construction risk corrected — not auto-YMYL; high safety/formula/editorial cost. Categories in primary nav deferred until second category publishes; use Browse link then Categories label.
 
 **Corrections:** `published-calculators.ts` becomes derived shim, not parallel registry. Percentage Calculator remains candidate-only pending separate SEO validation — not authorized in 4.1.
+
+---
+
+## 2026-09-02 — Phase 4.1 unified calculator catalog
+
+**Decision:** Establish `lib/calculator-catalog.ts` as the sole manually maintained source of calculator and category metadata. Derive publication routes and portfolio compatibility lists from the catalog.
+
+**Rationale:** Removes dual-registry drift between planning cards and sitemap publication while preserving existing consumer import paths.
+
+---
+
+## 2026-09-02 — Phase 4.1 derived publication shim
+
+**Decision:** Convert `lib/published-calculators.ts` into a re-export shim over `lib/calculator-catalog-publication.ts`. Publication is fail-closed: unknown slugs and non-published statuses return false; sitemap eligibility requires `status === "published"`, `sitemapEligible`, and `publishedAt`.
+
+**Rationale:** Keeps Phase 1–3.4 tests and sitemap consumers stable while eliminating a second hand-maintained published-route array.
+
+---
+
+## 2026-09-02 — Phase 4.1 Scientific Luminance V2 token foundation
+
+**Decision:** Add V2 semantic CSS custom properties (surfaces, status, category accents, spacing, typography roles, elevation) to `app/globals.css` while preserving legacy token names as compatibility aliases. Do not redesign components in Phase 4.1.
+
+**Rationale:** Token foundation enables later Homepage/Nav/Calculator Page V2 work without visual churn or gradient/glassmorphism regress.
