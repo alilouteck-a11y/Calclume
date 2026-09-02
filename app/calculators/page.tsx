@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { CategoryCard } from "@/components/calculator/CategoryCard";
+import { CategorySummaryCard } from "@/components/calculator/CategorySummaryCard";
 import { CalculatorCard } from "@/components/calculator/CalculatorCard";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { CalculatorSearch } from "@/components/search/CalculatorSearch";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { createPageMetadata } from "@/lib/metadata";
-import { launchCandidates, statisticsCalculators } from "@/lib/calculator-portfolio";
-import { isCalculatorPublished } from "@/lib/published-calculators";
+import {
+  getCategorySummariesWithCatalogTools,
+  getPublishedCalculators,
+} from "@/lib/calculator-catalog";
+import { buildSearchIndex } from "@/lib/calculator-search-index";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { getBreadcrumbSchema } from "@/lib/structured-data";
 
@@ -23,9 +27,9 @@ export default function CalculatorsPage() {
     { name: "Calculators", path: "/calculators/" },
   ];
 
-  const publishedLaunch = launchCandidates.filter((calculator) =>
-    isCalculatorPublished(calculator.slug),
-  );
+  const searchIndex = buildSearchIndex();
+  const publishedCalculators = getPublishedCalculators();
+  const collectionSummaries = getCategorySummariesWithCatalogTools();
 
   return (
     <>
@@ -37,12 +41,26 @@ export default function CalculatorsPage() {
       />
       <Section>
         <Container>
-          {publishedLaunch.length > 0 && (
-            <>
-              <h2 className="text-xl font-semibold text-ink">Available now</h2>
-              <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-                {publishedLaunch.map((calculator) => (
-                  <li key={calculator.slug}>
+          <div className="max-w-2xl">
+            <h2 className="text-lg font-semibold text-ink">Search calculators</h2>
+            <div className="mt-3">
+              <CalculatorSearch
+                searchIndex={searchIndex}
+                variant="directory"
+                enableSlashShortcut
+              />
+            </div>
+          </div>
+
+          {publishedCalculators.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-xl font-semibold text-ink">Available calculators</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted">
+                Published tools you can use now with formulas, steps, and interpretation.
+              </p>
+              <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                {publishedCalculators.map((calculator) => (
+                  <li key={calculator.id}>
                     <CalculatorCard
                       slug={calculator.slug}
                       name={calculator.name}
@@ -52,31 +70,48 @@ export default function CalculatorsPage() {
                   </li>
                 ))}
               </ul>
-            </>
+            </div>
           )}
 
-          <h2 className="mt-10 text-xl font-semibold text-ink">Collections</h2>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-            <li>
-              <CategoryCard
-                name="Statistics & Data"
-                description="Descriptive statistics, dispersion measures, and common inference helpers with step-by-step working."
-                href="/calculators/statistics/"
-                calculatorCount={statisticsCalculators.length}
-              />
-            </li>
-          </ul>
+          {collectionSummaries.length > 0 && (
+            <div id="categories" className="mt-12 scroll-mt-20">
+              <h2 className="text-xl font-semibold text-ink">Browse collections</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted">
+                Category collections include published tools and calculators still in
+                preparation. Only available tools are linked from this directory.
+              </p>
+              <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                {collectionSummaries.map((summary) => (
+                  <li key={summary.category.id}>
+                    <CategorySummaryCard
+                      categoryId={summary.category.id}
+                      name={summary.category.name}
+                      description={summary.category.description}
+                      publishedCount={summary.publishedCount}
+                      totalCount={summary.totalCount}
+                      preparationCount={summary.preparationCount}
+                      collectionHref={summary.collectionRoute}
+                      variant="directory"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          <p className="mt-8 text-sm text-muted">
-            Browse the{" "}
-            <Link
-              href="/calculators/statistics/"
-              className="font-semibold text-lume-teal hover:text-teal-hover"
-            >
-              Statistics &amp; Data collection
-            </Link>{" "}
-            for the full launch and expansion list.
-          </p>
+          {publishedCalculators.length > 0 && (
+            <p className="mt-8 text-sm text-muted">
+              {publishedCalculators.length} calculator
+              {publishedCalculators.length === 1 ? "" : "s"} published.{" "}
+              <Link
+                href="/methodology/"
+                className="font-semibold text-lume-teal hover:text-teal-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lume-teal"
+              >
+                Read our methodology
+              </Link>
+              .
+            </p>
+          )}
         </Container>
       </Section>
     </>

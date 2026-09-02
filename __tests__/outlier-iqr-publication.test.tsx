@@ -6,7 +6,7 @@ import { getSitemapPaths } from "@/app/sitemap";
 import robots from "@/app/robots";
 import CalculatorsPage from "@/app/calculators/page";
 import StatisticsCalculatorsPage from "@/app/calculators/statistics/page";
-import { StatisticsPreview } from "@/components/home/StatisticsPreview";
+import HomePage from "@/app/page";
 import { OutlierIqrEducationalContent } from "@/components/calculators/outlier-iqr/OutlierIqrEducationalContent";
 import { createPageMetadata } from "@/lib/metadata";
 import { launchCandidates } from "@/lib/calculator-portfolio";
@@ -70,10 +70,11 @@ describe("Outlier/IQR sitemap contract", () => {
 });
 
 describe("directory and homepage publication surfaces", () => {
-  it("lists both published calculators as Available with working links on /calculators/", () => {
+  it("lists both published calculators with working links on /calculators/", () => {
     render(<CalculatorsPage />);
 
-    expect(screen.getByRole("heading", { name: "Available now" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /available calculators/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /browse collections/i })).toBeInTheDocument();
 
     expect(
       screen.getByRole("link", { name: "Mean Absolute Deviation Calculator" }),
@@ -102,16 +103,17 @@ describe("directory and homepage publication surfaces", () => {
     expect(screen.queryByText(/Five Number Summary and Box Plot/i)).not.toBeInTheDocument();
   });
 
-  it("reflects two published calculators on the homepage preview without exaggeration", () => {
-    render(<StatisticsPreview />);
+  it("reflects two published calculators on the homepage without exaggeration", () => {
+    render(<HomePage />);
 
     expect(
-      screen.getByText(/2 calculators are available now/i),
+      screen.getByRole("heading", { name: /featured calculators/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /open calculator/i }),
-    ).toHaveLength(2);
+      screen.getAllByRole("link", { name: /open calculator/i }).length,
+    ).toBeGreaterThanOrEqual(2);
     expect(screen.queryByText(/Five Number Summary/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/popular calculators/i)).not.toBeInTheDocument();
   });
 });
 

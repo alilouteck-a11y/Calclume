@@ -7,6 +7,8 @@ type PageMetadataOptions = {
   description: string;
   path: string;
   noIndex?: boolean;
+  /** When set, used as the document title without appending the site name. */
+  absoluteTitle?: string;
 };
 
 export function createPageMetadata({
@@ -14,12 +16,14 @@ export function createPageMetadata({
   description,
   path,
   noIndex = false,
+  absoluteTitle,
 }: PageMetadataOptions): Metadata {
   const canonical = absoluteUrl(path);
   const fullTitle =
-    path === "/" && title === "Home"
+    absoluteTitle ??
+    (path === "/" && title === "Home"
       ? `${siteConfig.name} — ${siteConfig.tagline}`
-      : `${title} | ${siteConfig.name}`;
+      : `${title} | ${siteConfig.name}`);
 
   const ogImages = siteConfig.openGraphImage
     ? [

@@ -12,7 +12,7 @@ export const publicRoutes = [
   {
     path: "/calculators/statistics/",
     label: "Statistics",
-    inPrimaryNav: true,
+    inPrimaryNav: false,
     inFooter: true,
   },
   {

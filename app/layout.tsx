@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { buildSearchIndex } from "@/lib/calculator-search-index";
 import { defaultMetadata } from "@/lib/metadata";
 import {
   getOrganizationSchema,
@@ -27,6 +28,7 @@ export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const structuredData = [getOrganizationSchema(), getWebSiteSchema()];
+  const searchIndex = buildSearchIndex();
 
   return (
     <html
@@ -36,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <StructuredData data={structuredData} />
         <SkipLink />
-        <Header />
+        <Header searchIndex={searchIndex} />
         <div id="main-content" className="flex-1">
           {children}
         </div>

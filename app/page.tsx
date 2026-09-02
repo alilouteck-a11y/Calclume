@@ -1,27 +1,33 @@
 import { createPageMetadata } from "@/lib/metadata";
-import { HeroSection } from "@/components/home/HeroSection";
-import { ExamplePanel } from "@/components/home/ExamplePanel";
-import { StatisticsPreview } from "@/components/home/StatisticsPreview";
-import { WhyCalcLume } from "@/components/home/WhyCalcLume";
-import { MethodologyPreview } from "@/components/home/MethodologyPreview";
-import { FinalCta } from "@/components/home/FinalCta";
+import { buildSearchIndex } from "@/lib/calculator-search-index";
+import { HomeHeroSearch } from "@/components/home/HomeHeroSearch";
+import { HomeFeatured } from "@/components/home/HomeFeatured";
+import { HomeCategoryBrowse } from "@/components/home/HomeCategoryBrowse";
+import { HomeRecentlyAdded } from "@/components/home/HomeRecentlyAdded";
+import { HomeHowItWorks } from "@/components/home/HomeHowItWorks";
+import { HomeTrustStrip } from "@/components/home/HomeTrustStrip";
+import { HomeDiscoveryCta } from "@/components/home/HomeDiscoveryCta";
 
 export const metadata = createPageMetadata({
+  absoluteTitle: "CalcLume — Clear Calculators That Show the Work",
   title: "Home",
   description:
-    "CalcLume provides clear, transparent calculators that show your answer, the formula, each step, and a plain-language interpretation.",
+    "Browse clear, transparent calculators with formulas, steps, and interpretation. Calculations run locally in your browser.",
   path: "/",
 });
 
 export default function HomePage() {
+  const searchIndex = buildSearchIndex();
+
   return (
     <>
-      <HeroSection />
-      <ExamplePanel />
-      <StatisticsPreview />
-      <WhyCalcLume />
-      <MethodologyPreview />
-      <FinalCta />
+      <HomeHeroSearch searchIndex={searchIndex} />
+      <HomeFeatured />
+      <HomeCategoryBrowse />
+      <HomeRecentlyAdded />
+      <HomeHowItWorks />
+      <HomeTrustStrip />
+      <HomeDiscoveryCta />
     </>
   );
 }

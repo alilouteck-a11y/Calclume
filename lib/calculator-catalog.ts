@@ -437,3 +437,134 @@ export function isRoutePublished(route: string): boolean {
   const record = findCalculatorByRoute(route);
   return record !== undefined && isPublished(record);
 }
+
+export type CategoryWithPublishedCalculators = {
+  readonly category: CategoryRecord;
+  readonly calculators: readonly CalculatorRecord[];
+};
+
+export type CategoryCollectionSummary = {
+  readonly category: CategoryRecord;
+  readonly publishedCount: number;
+  readonly totalCount: number;
+  readonly preparationCount: number;
+  readonly collectionRoute: `/calculators/${CategoryId}/`;
+};
+
+export function getCategoryCollectionRoute(
+  categoryId: CategoryId,
+): `/calculators/${CategoryId}/` {
+  return `/calculators/${categoryId}/`;
+}
+
+/** Derived counts for a category collection — no hard-coded numbers. */
+export function getCategoryCollectionSummary(
+  categoryId: CategoryId,
+): CategoryCollectionSummary | undefined {
+  const category = findCategoryById(categoryId);
+  if (!category) {
+    return undefined;
+  }
+
+  const totalCount = getCalculatorsByCategory(categoryId).length;
+  if (totalCount === 0) {
+    return undefined;
+  }
+
+  const publishedCount = getPublishedCalculatorsByCategory(categoryId).length;
+
+  return {
+    category,
+    publishedCount,
+    totalCount,
+    preparationCount: totalCount - publishedCount,
+    collectionRoute: getCategoryCollectionRoute(categoryId),
+  };
+}
+
+/** Categories with at least one published calculator — homepage browse summaries. */
+export function getCategorySummariesWithPublishedTools(): readonly CategoryCollectionSummary[] {
+  return categories
+    .map((category) => getCategoryCollectionSummary(category.id))
+    .filter(
+      (summary): summary is CategoryCollectionSummary =>
+        summary !== undefined && summary.publishedCount > 0,
+    );
+}
+
+/** Categories with catalog inventory — directory collection browse. */
+export function getCategorySummariesWithCatalogTools(): readonly CategoryCollectionSummary[] {
+  return categories
+    .map((category) => getCategoryCollectionSummary(category.id))
+    .filter((summary): summary is CategoryCollectionSummary => summary !== undefined);
+}
+
+/** Categories that have at least one published calculator, stable catalog order. */
+export function getCategoriesWithPublishedCalculators(): readonly CategoryWithPublishedCalculators[] {
+  const groups: CategoryWithPublishedCalculators[] = [];
+
+  for (const category of categories) {
+    const publishedInCategory = getPublishedCalculatorsByCategory(category.id);
+    if (publishedInCategory.length > 0) {
+      groups.push({ category, calculators: publishedInCategory });
+    }
+  }
+
+  return groups;
+}
+
+/** Editorial featured published tools; falls back to all published (max 4). */
+export function getFeaturedPublishedCalculators(): readonly CalculatorRecord[] {
+  const published = getPublishedCalculators();
+  const featured = published.filter((entry) => entry.featured);
+  const list = featured.length > 0 ? featured : published;
+
+  return [...list]
+    .sort((left, right) => {
+      if (left.publishedAt && right.publishedAt) {
+        const byDate = right.publishedAt.localeCompare(left.publishedAt);
+        if (byDate !== 0) {
+          return byDate;
+        }
+      }
+      return left.name.localeCompare(right.name);
+    })
+    .slice(0, 4);
+}
+
+/** Recently added published tools sorted by publishedAt desc (max 4). */
+export function getRecentlyAddedPublishedCalculators(): readonly CalculatorRecord[] {
+  return getPublishedCalculators()
+    .filter((entry) => entry.recentlyAddedEligible)
+    .sort((left, right) => {
+      if (!left.publishedAt || !right.publishedAt) {
+        return 0;
+      }
+      return right.publishedAt.localeCompare(left.publishedAt);
+    })
+    .slice(0, 4);
+}
+
+/** True when Browse/Categories nav item should appear (≥2 categories with published tools). */
+export function shouldShowBrowseNavigation(): boolean {
+  const categoryIds = new Set(
+    getPublishedCalculators().map((entry) => entry.categoryId),
+  );
+  return categoryIds.size >= 2;
+}
+
+/** Browse nav target per Navigation V2 contract. */
+export function getBrowseNavigationLink(): { label: string; href: string } | null {
+  if (!shouldShowBrowseNavigation()) {
+    return null;
+  }
+
+  const indexableCount = categories.filter((category) =>
+    isCategoryIndexable(category.id),
+  ).length;
+
+  return {
+    label: indexableCount >= 2 ? "Categories" : "Browse",
+    href: "/calculators/#categories",
+  };
+}

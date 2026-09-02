@@ -37,7 +37,7 @@ describe("routes", () => {
 
   it("includes primary nav routes", () => {
     const labels = primaryNavRoutes.map((route) => route.label);
-    expect(labels).toEqual(["Calculators", "Statistics", "Methodology", "About"]);
+    expect(labels).toEqual(["Calculators", "Methodology", "About"]);
   });
 
   it("includes footer routes for all navigable pages", () => {

@@ -6,6 +6,8 @@ type CategoryCardProps = {
   description: string;
   href: string;
   calculatorCount?: number;
+  /** Defaults to "in preparation" for planning cards. */
+  countDescriptor?: string;
 };
 
 export function CategoryCard({
@@ -13,6 +15,7 @@ export function CategoryCard({
   description,
   href,
   calculatorCount,
+  countDescriptor = "in preparation",
 }: CategoryCardProps) {
   return (
     <Card as="article" className="h-full">
@@ -27,7 +30,8 @@ export function CategoryCard({
       <p className="mt-2 text-sm text-muted">{description}</p>
       {calculatorCount !== undefined && (
         <p className="mt-3 text-xs font-medium text-muted">
-          {calculatorCount} calculators in preparation
+          {calculatorCount} calculator{calculatorCount === 1 ? "" : "s"}{" "}
+          {countDescriptor}
         </p>
       )}
     </Card>

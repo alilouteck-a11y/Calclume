@@ -317,3 +317,45 @@ Chronological record of significant project decisions.
 **Decision:** Add V2 semantic CSS custom properties (surfaces, status, category accents, spacing, typography roles, elevation) to `app/globals.css` while preserving legacy token names as compatibility aliases. Do not redesign components in Phase 4.1.
 
 **Rationale:** Token foundation enables later Homepage/Nav/Calculator Page V2 work without visual churn or gradient/glassmorphism regress.
+
+---
+
+## 2026-09-02 — Phase 4.2 Navigation V2
+
+**Decision:** Remove Statistics from primary navigation; add Search control and mobile drawer. Defer Browse/Categories nav until a second category has ≥1 published calculator.
+
+**Rationale:** Phase 4.0 IA — directory-first discovery; primary nav cannot scale to ten categories.
+
+---
+
+## 2026-09-02 — Phase 4.2 client-side search
+
+**Decision:** Implement static client-side calculator search over published catalog entries only — custom normalization/ranking, 200 ms debounce, combobox a11y, no external search service or `?q=` URLs.
+
+**Rationale:** Phase 4.0 Search contract; sufficient at current catalog size; preserves static export.
+
+---
+
+## 2026-09-02 — Phase 4.2 Homepage and Directory V2
+
+**Decision:** Replace statistics-centric homepage with library-first sections (search hero, featured, browse by category, how-it-works, trust strip, CTA). Directory groups published tools by category at `#categories`. No preparation cards on homepage.
+
+**Rationale:** Phase 4.0 Homepage/Directory contracts; honest publication at two-calculator scale.
+
+---
+
+## 2026-09-02 — Phase 4.2 reconciliation
+
+**Decision:** Map homepage to nine-section contract via six body sections plus global Header/Footer; hide Recently Added until eligibility rule met; merge ExamplePanel + WhyCalcLume into HomeHowItWorks; use mobile menu drawer (not wrapping links); fix one-char search UX to avoid false no-results announcements.
+
+**Rationale:** Original Phase 4.2 prompt was truncated; reconciliation audits contracts without reverting working implementation. Footer intentionally unchanged until second indexable category hub.
+
+**Corrections:** `aria-current` on nav links; visible 2-char search hint; Statistics collection card uses “in this collection” count descriptor; focused implementation docs and screenshot validation added.
+
+---
+
+## 2026-09-02 — Phase 4.2 visual deduplication
+
+**Decision:** Remove duplicate calculator-card surfaces — full cards only in homepage Featured and directory Available calculators; category discovery uses compact `CategorySummaryCard` with catalog-derived counts. Compress homepage How-it-works to a compact MAD preview with link to live calculator.
+
+**Rationale:** Visual review found repetition made the two-calculator library feel smaller and the homepage too long on mobile; deduplication preserves discovery without redundant cards.
