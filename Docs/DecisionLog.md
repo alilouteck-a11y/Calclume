@@ -243,3 +243,53 @@ Chronological record of significant project decisions.
 **Decision:** Publish `/calculators/statistics/outlier-iqr/` via `publishedCalculatorRoutes`; educational worked example uses verified fixture **F02** (`high-outlier`: one upper outlier at 100). Remove the separate `five-number-summary-box-plot` launch-candidate card (scope bundled into Outlier/IQR per Phase 3.0).
 
 **Rationale:** F02 demonstrates the calculator’s primary outlier-detection purpose with engine-verified numbers; a no-outlier example (F05) under-served user intent. Separate five-number route would cannibalize the combined page.
+
+---
+
+## 2026-09-02 — Phase 4.0 multi-category architecture
+
+**Decision:** Adopt `/calculators/[category]/[calculator]/` URL taxonomy with kebab-case stable slugs; ten top-level categories (Math, Statistics, Finance, Business, Everyday Life, Date & Time, Conversions, Construction, Health, Science); **no indexable empty category pages**.
+
+**Rationale:** Scales the library without flat URL sprawl or synonym-split routes; matches existing Statistics paths; defers Construction and Health until editorial/YMYL capacity exists.
+
+---
+
+## 2026-09-02 — Phase 4.0 category publication gate
+
+**Decision:** New categories require **3 published calculators** before an indexable `/calculators/[category]/` landing page and sitemap entry. Statistics category page may remain indexable at **2** tools (grandfather) until a third statistics calculator ships.
+
+**Rationale:** Prevents thin hub pages; maintains Phase 1 honest-publication policy; Statistics is the founding cluster with an existing live collection page.
+
+---
+
+## 2026-09-02 — Phase 4.0 navigation model
+
+**Decision:** Remove category-specific items (e.g. Statistics) from primary navigation in favor of **Calculators · Methodology · About**; category discovery via directory and breadcrumbs.
+
+**Rationale:** Primary nav cannot scale to ten categories; directory-first IA matches multi-category positioning.
+
+---
+
+## 2026-09-02 — Phase 4.0 third calculator recommendation
+
+**Decision:** Recommend **Percentage Calculator** in **Math** as the third calculator candidate, subject to a **separate SEO opportunity-validation phase** (mirror Phase 3.0). Do not authorize implementation until validation completes.
+
+**Rationale:** Expands into a second category to prove multi-category registry and UX; low YMYL; strong step-by-step differentiation. If validation fails, fall back to Coefficient of Variation (Statistics).
+
+---
+
+## 2026-09-02 — Phase 4.0 Scientific Luminance V2
+
+**Decision:** Extend design system with restrained per-category accent tokens, calculator trust strip (local · sources · last reviewed), directory V2 layout, and linked related-calculator cards for published tools — without gradients, ads, or calculator-farm visual patterns.
+
+**Rationale:** Visual evolution must support category breadth while preserving calm, trustworthy Scientific Luminance identity.
+
+---
+
+## 2026-09-02 — Phase 4.0 reconciliation (architecture contracts)
+
+**Decision:** Complete Phase 4.0 with implementation-ready contracts: unified `calculator-catalog.ts` source of truth (derived publication gate), client-side search without external deps, Homepage/Nav/Calculator Page V2 hierarchies, Scientific Luminance V2 token spec, a11y/performance budgets, SEO safeguards, four-dimension risk model (YMYL / Safety / Formula-unit / Editorial cost), and migration phases 4.1–4.5.
+
+**Rationale:** Original Phase 4.0 batch lacked explicit IA, catalog, search, shell, a11y, SEO, and migration contracts; reconciliation maps every deliverable without duplicating shallow content. Construction risk corrected — not auto-YMYL; high safety/formula/editorial cost. Categories in primary nav deferred until second category publishes; use Browse link then Categories label.
+
+**Corrections:** `published-calculators.ts` becomes derived shim, not parallel registry. Percentage Calculator remains candidate-only pending separate SEO validation — not authorized in 4.1.
