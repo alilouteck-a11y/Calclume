@@ -235,3 +235,11 @@ Chronological record of significant project decisions.
 **Decision:** Inline SVG box plot with `role="img"`, visible prose summary, `<desc>` duplication, and `sr-only` data table. Engine supplies `boxPlot.domainMin/Max`; coordinate mapping occurs only in the component. Fences use dashed strokes; median uses heavier stroke; outliers use labeled open circles. No chart library.
 
 **Rationale:** Locked in Phase 3.1; satisfies non-color-only and no-hover requirements while staying static-export friendly.
+
+---
+
+## 2026-09-02 — Phase 3.4 Outlier/IQR page publication
+
+**Decision:** Publish `/calculators/statistics/outlier-iqr/` via `publishedCalculatorRoutes`; educational worked example uses verified fixture **F02** (`high-outlier`: one upper outlier at 100). Remove the separate `five-number-summary-box-plot` launch-candidate card (scope bundled into Outlier/IQR per Phase 3.0).
+
+**Rationale:** F02 demonstrates the calculator’s primary outlier-detection purpose with engine-verified numbers; a no-outlier example (F05) under-served user intent. Separate five-number route would cannibalize the combined page.

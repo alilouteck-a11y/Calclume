@@ -188,7 +188,12 @@ MAD = Σ|xᵢ − x̄| / n`}
       <p>
         For how CalcLume selects formulas and reviews calculator pages, see the{" "}
         <Link href="/methodology/">methodology</Link> and{" "}
-        <Link href="/sources/">sources</Link> pages.
+        <Link href="/sources/">sources</Link> pages. For quartile-based spread,
+        fences, and box-plot context, see the{" "}
+        <Link href="/calculators/statistics/outlier-iqr/">
+          Outlier and IQR Calculator
+        </Link>
+        .
       </p>
     </div>
   );

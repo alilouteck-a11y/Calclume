@@ -27,13 +27,6 @@ export const statisticsCalculators: PlannedCalculator[] = [
     status: "launch-candidate",
   },
   {
-    slug: "five-number-summary-box-plot",
-    name: "Five Number Summary and Box Plot Calculator",
-    description:
-      "Compute min, Q1, median, Q3, max and visualize distribution structure.",
-    status: "launch-candidate",
-  },
-  {
     slug: "coefficient-of-variation",
     name: "Coefficient of Variation Calculator",
     description:

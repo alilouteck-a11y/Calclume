@@ -100,6 +100,11 @@ export function getClassificationLabel(
 
 export const outlierIqrCalculatorConfig = {
   slug: "outlier-iqr",
+  name: "Outlier and IQR Calculator",
+  description:
+    "Calculate Q1, median, Q3, and IQR from your data. Find Tukey fence boundaries, identify potential outliers, view the five-number summary and an accessible box plot, and choose a quartile method—all computed locally in your browser.",
+  path: "/calculators/statistics/outlier-iqr/",
+  lastReviewed: "2026-09-02",
   formula: {
     iqr: "IQR = Q3 − Q1",
     lowerFence: "Lower fence = Q1 − k × IQR",
@@ -147,6 +152,26 @@ export const outlierIqrCalculatorConfig = {
       expectedIqr: 6,
       expectedOutlierCount: 0,
       source: "Phase 3.1 fixture F16 (exclusive-halves default)",
+    },
+  ],
+  sources: [
+    {
+      title: "NIST/SEMATECH e-Handbook — What are outliers in the data?",
+      publisher: "National Institute of Standards and Technology",
+      url: "https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm",
+      note: "Defines outliers in exploratory analysis; describes box-plot quartiles, IQR, and inner/outer fence multipliers (1.5× and 3× IQR). NIST quartile extraction in worked examples may differ from classroom median-of-halves rules—CalcLume documents its quartile methods separately.",
+    },
+    {
+      title: "OpenStax Introductory Statistics — Box Plots",
+      publisher: "OpenStax",
+      url: "https://openstax.org/books/introductory-statistics-2e/pages/2-4-box-plots",
+      note: "Five-number summary components, IQR, whiskers, and outlier marking in box-plot context.",
+    },
+    {
+      title: "Langford (2006) — Quartiles in elementary education",
+      publisher: "American Statistician",
+      url: "https://doi.org/10.1080/10691898.2006.11910589",
+      note: "Documents that quartile definitions vary across textbooks and software; supports offering an explicit method selector.",
     },
   ],
 } as const;

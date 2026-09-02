@@ -2,7 +2,10 @@ import { readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { statisticsCalculators } from "@/lib/calculator-portfolio";
-import { publishedCalculatorRoutes } from "@/lib/published-calculators";
+import {
+  isCalculatorPublished,
+  publishedCalculatorRoutes,
+} from "@/lib/published-calculators";
 
 const appDir = join(process.cwd(), "app");
 
@@ -39,6 +42,7 @@ describe("calculator route publication", () => {
 
     expect(calculatorDetailRoutes).toEqual([
       "/calculators/statistics/mean-absolute-deviation",
+      "/calculators/statistics/outlier-iqr",
     ]);
   });
 
@@ -46,7 +50,7 @@ describe("calculator route publication", () => {
     const routes = collectPageRoutes(appDir);
     const unpublishedSlugs = statisticsCalculators
       .map((calculator) => calculator.slug)
-      .filter((slug) => slug !== "mean-absolute-deviation");
+      .filter((slug) => !isCalculatorPublished(slug));
 
     for (const slug of unpublishedSlugs) {
       const detailRoute = routes.find((route) => route.includes(slug));
@@ -57,6 +61,7 @@ describe("calculator route publication", () => {
   it("matches published route registry", () => {
     expect(publishedCalculatorRoutes).toEqual([
       "/calculators/statistics/mean-absolute-deviation/",
+      "/calculators/statistics/outlier-iqr/",
     ]);
   });
 });

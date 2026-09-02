@@ -6,9 +6,12 @@ import { publishedCalculatorRoutes } from "@/lib/published-calculators";
 import { siteConfig } from "@/lib/site-config";
 import { getMadSoftwareApplicationSchema } from "@/lib/calculators/mean-absolute-deviation-schema";
 import { madCalculatorConfig } from "@/lib/calculators/mean-absolute-deviation-config";
+import { getOutlierIqrSoftwareApplicationSchema } from "@/lib/calculators/outlier-iqr-structured-data";
+import { outlierIqrCalculatorConfig } from "@/lib/calculators/outlier-iqr-config";
 import { getBreadcrumbSchema } from "@/lib/structured-data";
 import { createPageMetadata } from "@/lib/metadata";
 import { launchCandidates } from "@/lib/calculator-portfolio";
+import { isCalculatorPublished } from "@/lib/published-calculators";
 
 describe("production sitemap integrity", () => {
   it("includes each public route and the MAD route exactly once", () => {
@@ -30,7 +33,7 @@ describe("production sitemap integrity", () => {
     expect(paths).not.toContain("/_not-found/");
 
     for (const calculator of launchCandidates) {
-      if (calculator.slug === "mean-absolute-deviation") {
+      if (isCalculatorPublished(calculator.slug)) {
         continue;
       }
       expect(paths).not.toContain(`/calculators/statistics/${calculator.slug}/`);
@@ -116,6 +119,40 @@ describe("MAD production structured data", () => {
     expect(schema?.itemListElement).toHaveLength(4);
     expect(schema?.itemListElement.at(-1)?.item).toBe(
       "https://calclume.com/calculators/statistics/mean-absolute-deviation/",
+    );
+  });
+});
+
+describe("Outlier/IQR production structured data", () => {
+  it("produces parseable JSON-LD without ratings, reviews, FAQ, or HowTo", () => {
+    const schema = getOutlierIqrSoftwareApplicationSchema();
+    const serialized = JSON.stringify(schema);
+    const parsed = JSON.parse(serialized);
+
+    expect(parsed["@type"]).toBe("SoftwareApplication");
+    expect(parsed.url).toBe(
+      "https://calclume.com/calculators/statistics/outlier-iqr/",
+    );
+    expect(parsed.name).toBe(outlierIqrCalculatorConfig.name);
+    expect(serialized).not.toMatch(
+      /FAQPage|HowTo|AggregateRating|Review|author|downloadUrl|installUrl/i,
+    );
+  });
+
+  it("builds BreadcrumbList for the Outlier/IQR route", () => {
+    const schema = getBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Calculators", path: "/calculators/" },
+      { name: "Statistics", path: "/calculators/statistics/" },
+      {
+        name: "Outlier and IQR",
+        path: outlierIqrCalculatorConfig.path,
+      },
+    ]);
+
+    expect(schema?.["@type"]).toBe("BreadcrumbList");
+    expect(schema?.itemListElement.at(-1)?.item).toBe(
+      "https://calclume.com/calculators/statistics/outlier-iqr/",
     );
   });
 });

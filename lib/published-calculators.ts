@@ -1,6 +1,7 @@
 /** Slugs of calculators published as public routes and included in the sitemap. */
 export const publishedCalculatorRoutes = [
   "/calculators/statistics/mean-absolute-deviation/",
+  "/calculators/statistics/outlier-iqr/",
 ] as const;
 
 export type PublishedCalculatorRoute = (typeof publishedCalculatorRoutes)[number];

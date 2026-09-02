@@ -54,8 +54,10 @@ export default function StatisticsCalculatorsPage() {
             </CalculatorNotice>
           ) : (
             <CalculatorNotice title="Collection in progress">
-              {publishedCount} of {launchCandidates.length} launch calculators
-              is available. Remaining tools are listed below as in preparation.
+              {publishedCount} of {launchCandidates.length} launch calculator
+              {launchCandidates.length === 1 ? "" : "s"}{" "}
+              {publishedCount === 1 ? "is" : "are"} available. Remaining tools are
+              listed below as in preparation.
             </CalculatorNotice>
           )}
 
