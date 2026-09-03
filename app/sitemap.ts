@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl, sitemapRoutes } from "@/lib/routes";
+import { getSitemapEligibleCategoryRoutes } from "@/lib/calculator-category-publication";
 import { publishedCalculatorRoutes } from "@/lib/published-calculators";
 
 export const dynamic = "force-static";
 
 export function getSitemapPaths(): string[] {
-  return [...sitemapRoutes, ...publishedCalculatorRoutes];
+  const categoryRoutes = getSitemapEligibleCategoryRoutes();
+  return [...sitemapRoutes, ...categoryRoutes, ...publishedCalculatorRoutes];
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {

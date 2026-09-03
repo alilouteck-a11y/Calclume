@@ -1,28 +1,23 @@
 /**
  * Unified calculator catalog — sole manually maintained source of calculator metadata.
  * Server-safe and build-time safe. No React, browser APIs, or client directives.
+ *
+ * Category metadata lives in `lib/calculator-categories.ts`.
+ * Category publication/indexation helpers live in `lib/calculator-category-publication.ts`.
  */
 
-export type CategoryId =
-  | "math"
-  | "statistics"
-  | "finance"
-  | "business"
-  | "everyday-life"
-  | "date-time"
-  | "conversions"
-  | "construction"
-  | "health"
-  | "science";
+import {
+  calculatorCategories,
+  getCategoryById,
+  type CategoryDefinition,
+  type CategoryId,
+} from "@/lib/calculator-categories";
 
-export type CategoryRecord = {
-  readonly id: CategoryId;
-  readonly name: string;
-  readonly description: string;
-  /** Minimum published calculators before indexable category page */
-  readonly minPublishedForIndex: number;
-  readonly editorialRiskLevel: EditorialRiskLevel;
-};
+export type { CategoryId, CategoryDefinition };
+export type CategoryRecord = CategoryDefinition;
+
+/** @deprecated Prefer importing from `lib/calculator-categories`. Kept for compatibility. */
+export const categories = calculatorCategories;
 
 export type CalculatorStatus =
   | "published"
@@ -62,84 +57,7 @@ export type CalculatorRecord = {
   readonly editorialRiskLevel: EditorialRiskLevel;
 };
 
-export const categories = [
-  {
-    id: "math",
-    name: "Math",
-    description:
-      "Arithmetic, algebra, and general mathematical tools with transparent steps.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "low",
-  },
-  {
-    id: "statistics",
-    name: "Statistics",
-    description:
-      "Descriptive and exploratory statistics tools with formulas and interpretation.",
-    minPublishedForIndex: 2,
-    editorialRiskLevel: "medium",
-  },
-  {
-    id: "finance",
-    name: "Finance",
-    description:
-      "Personal and small-business financial calculations with documented assumptions.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "high",
-  },
-  {
-    id: "business",
-    name: "Business",
-    description:
-      "Operational metrics such as margins and break-even with clear definitions.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "medium",
-  },
-  {
-    id: "everyday-life",
-    name: "Everyday Life",
-    description: "Practical daily calculators for tips, splits, and simple estimates.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "low",
-  },
-  {
-    id: "date-time",
-    name: "Date & Time",
-    description: "Calendar duration and date arithmetic with documented assumptions.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "medium",
-  },
-  {
-    id: "conversions",
-    name: "Conversions",
-    description: "Unit conversions with cited factors and transparent formulas.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "medium",
-  },
-  {
-    id: "construction",
-    name: "Construction",
-    description: "Material and geometry estimates — deferred pending editorial capacity.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "high",
-  },
-  {
-    id: "health",
-    name: "Health",
-    description: "Health-related calculators — deferred until YMYL review process matures.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "high",
-  },
-  {
-    id: "science",
-    name: "Science",
-    description: "Physics and chemistry calculations with documented constants and units.",
-    minPublishedForIndex: 3,
-    editorialRiskLevel: "medium",
-  },
-] as const satisfies readonly CategoryRecord[];
-
-export type CatalogCategory = (typeof categories)[number];
+export type CatalogCategory = (typeof calculatorCategories)[number];
 
 /**
  * Sole manually maintained calculator metadata.
@@ -392,7 +310,7 @@ export function findCalculatorBySlug(slug: string): CalculatorRecord | undefined
 }
 
 export function findCategoryById(id: CategoryId): CategoryRecord | undefined {
-  return categories.find((entry) => entry.id === id);
+  return getCategoryById(id);
 }
 
 export function isCategoryIndexable(categoryId: CategoryId): boolean {
@@ -401,7 +319,7 @@ export function isCategoryIndexable(categoryId: CategoryId): boolean {
     return false;
   }
   const publishedCount = getPublishedCalculatorsByCategory(categoryId).length;
-  return publishedCount >= category.minPublishedForIndex;
+  return publishedCount >= category.minimumPublishedCalculators;
 }
 
 /**
@@ -492,9 +410,10 @@ export function getCategorySummariesWithPublishedTools(): readonly CategoryColle
     );
 }
 
-/** Categories with catalog inventory — directory collection browse. */
+/** Categories with catalog inventory that are public hubs — directory collections. */
 export function getCategorySummariesWithCatalogTools(): readonly CategoryCollectionSummary[] {
   return categories
+    .filter((category) => isCategoryIndexable(category.id))
     .map((category) => getCategoryCollectionSummary(category.id))
     .filter((summary): summary is CategoryCollectionSummary => summary !== undefined);
 }

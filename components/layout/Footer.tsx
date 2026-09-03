@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
-import { footerNavRoutes } from "@/lib/routes";
+import { getFooterNavRoutes } from "@/lib/routes";
 import { Container } from "@/components/ui/Container";
 
 export function Footer() {
+  const footerLinks = getFooterNavRoutes();
+
   return (
     <footer className="mt-auto border-t border-border bg-white">
       <Container className="py-10">
@@ -15,7 +17,7 @@ export function Footer() {
           <nav aria-label="Footer">
             <p className="text-sm font-semibold text-ink">Site</p>
             <ul className="mt-3 grid grid-cols-2 gap-2">
-              {footerNavRoutes.map((route) => (
+              {footerLinks.map((route) => (
                 <li key={route.path}>
                   <Link
                     href={route.path}

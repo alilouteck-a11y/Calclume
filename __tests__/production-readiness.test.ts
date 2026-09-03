@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getSitemapPaths } from "@/app/sitemap";
 import robots from "@/app/robots";
-import { absoluteUrl, publicRoutes, sitemapRoutes } from "@/lib/routes";
-import { publishedCalculatorRoutes } from "@/lib/published-calculators";
+import { absoluteUrl, publicRoutes } from "@/lib/routes";
 import { siteConfig } from "@/lib/site-config";
 import { getMadSoftwareApplicationSchema } from "@/lib/calculators/mean-absolute-deviation-schema";
 import { madCalculatorConfig } from "@/lib/calculators/mean-absolute-deviation-config";
@@ -19,7 +18,8 @@ describe("production sitemap integrity", () => {
     const mad = "/calculators/statistics/mean-absolute-deviation/";
 
     expect(paths.filter((path) => path === mad)).toHaveLength(1);
-    expect(paths).toHaveLength(sitemapRoutes.length + publishedCalculatorRoutes.length);
+    expect(paths).toHaveLength(12);
+    expect(paths).toContain("/calculators/statistics/");
 
     for (const route of publicRoutes) {
       expect(paths).toContain(route.path);

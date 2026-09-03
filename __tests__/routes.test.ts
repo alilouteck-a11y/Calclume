@@ -12,7 +12,7 @@ describe("routes", () => {
     const paths = publicRoutes.map((route) => route.path);
     expect(paths).toContain("/");
     expect(paths).toContain("/calculators/");
-    expect(paths).toContain("/calculators/statistics/");
+    expect(paths).not.toContain("/calculators/statistics/");
     expect(paths).toContain("/about/");
     expect(paths).toContain("/methodology/");
     expect(paths).toContain("/editorial-policy/");
@@ -40,16 +40,18 @@ describe("routes", () => {
     expect(labels).toEqual(["Calculators", "Methodology", "About"]);
   });
 
-  it("includes footer routes for all navigable pages", () => {
+  it("includes footer routes for trust pages and derived public categories", () => {
     const footerPaths = footerNavRoutes.map((route) => route.path);
     expect(footerPaths).toContain("/editorial-policy/");
     expect(footerPaths).toContain("/contact/");
     expect(footerPaths).toContain("/privacy/");
     expect(footerPaths).toContain("/terms/");
+    expect(footerPaths).toContain("/calculators/statistics/");
   });
 
-  it("sitemap contains only public routes", () => {
+  it("keeps base sitemap routes separate from calculator and category hubs", () => {
     expect(sitemapRoutes.length).toBe(publicRoutes.length);
+    expect(sitemapRoutes).not.toContain("/calculators/statistics/");
   });
 
   it("published calculators are tracked separately", () => {

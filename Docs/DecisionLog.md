@@ -367,3 +367,11 @@ Chronological record of significant project decisions.
 **Decision:** All public pages must consume the single root-layout Phase 4.2 `Header` / `MobileNavDrawer`. Category links (including Statistics) do not belong in primary navigation at the current publication threshold (one published category).
 
 **Rationale:** Live audit confusion between breadcrumb Statistics and primary nav; preventing a second header implementation keeps static export shells identical across calculator pages.
+
+---
+
+## 2026-09-02 — Phase 4.3 category infrastructure
+
+**Decision:** Establish `lib/calculator-categories.ts` as the category registry. Indexable/public/sitemap category hubs require ≥3 published calculators by default; Statistics remains grandfathered at 2. Category existence never implies a public route. Sitemap category URLs are derived from indexability helpers — not a hard-coded category allowlist.
+
+**Rationale:** Enables multi-category growth without thin hubs or parallel publication lists. Dynamic `[category]` static export is deferred until a second hub is indexable because empty `generateStaticParams` is incompatible with `output: "export"`.

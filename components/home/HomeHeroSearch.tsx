@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CalculatorSearch } from "@/components/search/CalculatorSearch";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -31,9 +32,9 @@ export function HomeHeroSearch({ searchIndex }: HomeHeroSearchProps) {
           <noscript>
             <p className="mt-4 text-sm text-muted">
               Browse all calculators on the{" "}
-              <a href="/calculators/" className="font-semibold text-lume-teal underline">
+              <Link href="/calculators/" className="font-semibold text-lume-teal underline">
                 calculator directory
-              </a>
+              </Link>
               .
             </p>
           </noscript>

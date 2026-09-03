@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { getSitemapPaths } from "@/app/sitemap";
 import robots from "@/app/robots";
 import CalculatorsPage from "@/app/calculators/page";
-import StatisticsCalculatorsPage from "@/app/calculators/statistics/page";
+import { CategoryCollectionPage } from "@/components/category/CategoryCollectionPage";
 import HomePage from "@/app/page";
 import { OutlierIqrEducationalContent } from "@/components/calculators/outlier-iqr/OutlierIqrEducationalContent";
 import { createPageMetadata } from "@/lib/metadata";
@@ -18,7 +18,6 @@ import {
   isCalculatorPublished,
   publishedCalculatorRoutes,
 } from "@/lib/published-calculators";
-import { sitemapRoutes } from "@/lib/routes";
 import { getBreadcrumbSchema } from "@/lib/structured-data";
 
 afterEach(() => {
@@ -49,8 +48,8 @@ describe("Outlier/IQR publication registry", () => {
 describe("Outlier/IQR sitemap contract", () => {
   it("contains exactly twelve approved HTTPS URLs", () => {
     const paths = getSitemapPaths();
-    expect(paths).toHaveLength(sitemapRoutes.length + publishedCalculatorRoutes.length);
     expect(paths).toHaveLength(12);
+    expect(paths).toContain("/calculators/statistics/");
     expect(paths.filter((path) => path === outlierIqrCalculatorConfig.path)).toHaveLength(
       1,
     );
@@ -88,7 +87,7 @@ describe("directory and homepage publication surfaces", () => {
   });
 
   it("lists both published calculators on /calculators/statistics/ without a separate five-number card", () => {
-    render(<StatisticsCalculatorsPage />);
+    render(<CategoryCollectionPage categoryId="statistics" />);
 
     expect(
       screen.getByRole("link", {

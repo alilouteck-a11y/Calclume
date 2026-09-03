@@ -37,13 +37,22 @@ describe("calculator route publication", () => {
       (route) =>
         route.startsWith("/calculators/") &&
         route !== "/calculators" &&
-        route !== "/calculators/statistics",
+        route !== "/calculators/statistics" &&
+        !route.includes("["),
     );
 
     expect(calculatorDetailRoutes).toEqual([
       "/calculators/statistics/mean-absolute-deviation",
       "/calculators/statistics/outlier-iqr",
     ]);
+  });
+
+  it("does not create filesystem routes for unpublished category hubs", () => {
+    const routes = collectPageRoutes(appDir);
+    expect(routes).toContain("/calculators/statistics");
+    expect(routes).not.toContain("/calculators/math");
+    expect(routes).not.toContain("/calculators/finance");
+    expect(routes).not.toContain("/calculators/[category]");
   });
 
   it("does not publish unpublished calculator slugs", () => {
