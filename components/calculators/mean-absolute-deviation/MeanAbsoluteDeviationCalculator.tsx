@@ -196,8 +196,8 @@ export function MeanAbsoluteDeviationCalculator() {
                   <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
                     {summary[0].label}
                   </dt>
-                  <dd className="mt-1 text-3xl font-bold text-ink">
-                    {summary[0].value}
+                  <dd className="mt-1 break-words font-bold text-ink [font-size:var(--text-result-primary)] [line-height:var(--text-result-primary-line-height)]">
+                    MAD = <span>{summary[0].value}</span>
                   </dd>
                 </div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">

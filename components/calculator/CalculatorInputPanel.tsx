@@ -12,7 +12,10 @@ export function CalculatorInputPanel({
   description,
 }: CalculatorInputPanelProps) {
   return (
-    <section aria-labelledby="calculator-inputs-heading">
+    <section
+      aria-labelledby="calculator-inputs-heading"
+      className="rounded-md border border-border bg-[var(--color-surface-subtle)] p-4 sm:p-5"
+    >
       <h3 id="calculator-inputs-heading" className="text-base font-semibold text-ink">
         {title}
       </h3>

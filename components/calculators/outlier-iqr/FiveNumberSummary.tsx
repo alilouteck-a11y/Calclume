@@ -25,11 +25,11 @@ export function FiveNumberSummary({ result, decimals }: FiveNumberSummaryProps) 
       >
         Five-number summary
       </h3>
-      <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 min-[360px]:grid-cols-2 lg:grid-cols-5">
         {items.map((item) => (
-          <div key={item.label} className="rounded-md border border-border bg-paper p-3">
-            <dt className="text-sm text-muted">{item.label}</dt>
-            <dd className="mt-1 font-mono text-sm font-medium text-ink">
+          <div key={item.label} className="min-w-0">
+            <dt className="text-xs text-muted">{item.label}</dt>
+            <dd className="mt-0.5 break-words font-mono text-sm font-medium text-ink">
               {item.value}
             </dd>
           </div>

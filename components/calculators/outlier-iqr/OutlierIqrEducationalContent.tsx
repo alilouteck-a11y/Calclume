@@ -8,8 +8,8 @@ import { outlierIqrEducationalExample as example } from "@/lib/calculators/outli
  */
 export function OutlierIqrEducationalContent() {
   return (
-    <div className="prose-content mt-10 max-w-3xl border-t border-border pt-10">
-      <h2>What is the interquartile range?</h2>
+    <div className="prose-content mt-8 max-w-[65ch]">
+      <h2 id="what-is-the-interquartile-range">What is the interquartile range?</h2>
       <p>
         The interquartile range (IQR) measures how spread out the middle half of a
         dataset is. You find the first quartile (Q1) and third quartile (Q3), then
@@ -22,7 +22,7 @@ export function OutlierIqrEducationalContent() {
         wide or narrow depends on the scale and context of the data.
       </p>
 
-      <h2>What is an outlier?</h2>
+      <h2 id="what-is-an-outlier">What is an outlier?</h2>
       <p>
         In exploratory data analysis, an <strong>outlier</strong> is an observation
         that appears unusually far from the bulk of the data. Outliers are not
@@ -36,7 +36,7 @@ export function OutlierIqrEducationalContent() {
         dataset automatically—the tool only labels points for review.
       </p>
 
-      <h2>IQR formula</h2>
+      <h2 id="iqr-formula">IQR formula</h2>
       <p>CalcLume uses the following definition:</p>
       <pre className="formula-block my-4 rounded-md border border-border bg-paper p-4 text-sm text-ink whitespace-pre-wrap">
         {outlierIqrCalculatorConfig.formula.combined}
@@ -64,7 +64,7 @@ export function OutlierIqrEducationalContent() {
         Fences are reference boundaries; whiskers are data extrema among non-outliers.
       </p>
 
-      <h2>How IQR fences work</h2>
+      <h2 id="how-iqr-fences-work">How IQR fences work</h2>
       <p>
         Tukey-style fences extend outward from the quartiles by a multiple of the
         IQR. With the default <strong>1.5 × IQR</strong> rule (sometimes called inner
@@ -84,7 +84,7 @@ export function OutlierIqrEducationalContent() {
         rather than claiming universal “mild” or “extreme” terminology for every field.
       </p>
 
-      <h2>How to calculate IQR and outliers</h2>
+      <h2 id="how-to-calculate-iqr-and-outliers">How to calculate IQR and outliers</h2>
       <ol>
         <li>Enter your numeric observations (4 to 1,000 values).</li>
         <li>
@@ -115,7 +115,7 @@ export function OutlierIqrEducationalContent() {
         recalculation to refresh the output.
       </p>
 
-      <h2>Worked example</h2>
+      <h2 id="worked-example">Worked example</h2>
       <p>
         Dataset (original order): <code>{example.input}</code> (fixture{" "}
         {example.fixtureId}; example <code>{example.exampleId}</code>)
@@ -160,7 +160,7 @@ export function OutlierIqrEducationalContent() {
         reference boundaries—not whisker endpoints.
       </p>
 
-      <h2>Five-number summary explained</h2>
+      <h2 id="five-number-summary-explained">Five-number summary explained</h2>
       <p>
         The five-number summary reports the minimum observed value, Q1, median, Q3,
         and maximum observed value. It describes location and spread without assuming
@@ -174,7 +174,7 @@ export function OutlierIqrEducationalContent() {
         bulk of the data.
       </p>
 
-      <h2>How to read the box plot</h2>
+      <h2 id="how-to-read-the-box-plot">How to read the box plot</h2>
       <p>
         The horizontal box plot on this page maps numeric values to position along an
         axis. The box spans Q1 to Q3; the median appears as a distinct line inside the
@@ -189,7 +189,7 @@ export function OutlierIqrEducationalContent() {
         relying on hue alone.
       </p>
 
-      <h2>Why quartile methods can disagree</h2>
+      <h2 id="why-quartile-methods-can-disagree">Why quartile methods can disagree</h2>
       <p>
         Quartile definitions are not standardized across textbooks, homework systems,
         and spreadsheet functions. The same dataset can yield different Q1 and Q3
@@ -205,7 +205,7 @@ export function OutlierIqrEducationalContent() {
         method you used when sharing results.
       </p>
 
-      <h2>IQR versus mean absolute deviation</h2>
+      <h2 id="iqr-versus-mean-absolute-deviation">IQR versus mean absolute deviation</h2>
       <p>
         IQR summarizes spread through quartiles and is relatively resistant to extreme
         values in the sense that outliers are summarized separately once fences are
@@ -222,7 +222,7 @@ export function OutlierIqrEducationalContent() {
         Many exploratory workflows use both.
       </p>
 
-      <h2>IQR versus standard deviation</h2>
+      <h2 id="iqr-versus-standard-deviation">IQR versus standard deviation</h2>
       <p>
         Standard deviation measures spread around the mean using squared deviations.
         Large values influence standard deviation more strongly than IQR because
@@ -234,7 +234,7 @@ export function OutlierIqrEducationalContent() {
         or mean-based spread better matches your question and audience.
       </p>
 
-      <h2>When IQR is useful</h2>
+      <h2 id="when-iqr-is-useful">When IQR is useful</h2>
       <ul>
         <li>Summarizing the spread of the middle 50% of observations</li>
         <li>Flagging unusually low or high values with transparent fence rules</li>
@@ -243,7 +243,7 @@ export function OutlierIqrEducationalContent() {
         <li>Reviewing data quality before analysis without deleting points automatically</li>
       </ul>
 
-      <h2>Limitations</h2>
+      <h2 id="limitations">Limitations</h2>
       <ul>
         <li>
           Quartile positions depend on the selected method; compare results only when

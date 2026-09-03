@@ -39,9 +39,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <StructuredData data={structuredData} />
         <SkipLink />
         <Header searchIndex={searchIndex} />
-        <div id="main-content" className="flex-1">
+        <main id="main-content" className="flex-1">
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

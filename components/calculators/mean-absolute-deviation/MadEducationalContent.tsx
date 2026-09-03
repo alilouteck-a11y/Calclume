@@ -6,8 +6,8 @@ import Link from "next/link";
  */
 export function MadEducationalContent() {
   return (
-    <div className="prose-content mt-10 max-w-3xl border-t border-border pt-10">
-      <h2>What is mean absolute deviation?</h2>
+    <div className="prose-content mt-8 max-w-[65ch]">
+      <h2 id="what-is-mean-absolute-deviation">What is mean absolute deviation?</h2>
       <p>
         Mean absolute deviation (MAD) measures how far values in a dataset typically
         sit from the arithmetic mean. For each observation, you find the distance to
@@ -27,7 +27,7 @@ export function MadEducationalContent() {
         absolute percentage error (which scales deviations by the observed values).
       </p>
 
-      <h2>Mean absolute deviation formula</h2>
+      <h2 id="mean-absolute-deviation-formula">Mean absolute deviation formula</h2>
       <p>CalcLume uses the following definition:</p>
       <pre className="formula-block my-4 rounded-md border border-border bg-paper p-4 text-sm text-ink whitespace-pre-wrap">
         {`x̄ = Σxᵢ / n
@@ -56,7 +56,7 @@ MAD = Σ|xᵢ − x̄| / n`}
         setting you choose.
       </p>
 
-      <h2>How to calculate MAD</h2>
+      <h2 id="how-to-calculate-mad">How to calculate MAD</h2>
       <ol>
         <li>Enter the numeric values that form your dataset.</li>
         <li>
@@ -77,7 +77,7 @@ MAD = Σ|xᵢ − x̄| / n`}
         table, and a neutral interpretation of the average distance from the mean.
       </p>
 
-      <h2>Complete worked example</h2>
+      <h2 id="complete-worked-example">Complete worked example</h2>
       <p>
         Dataset: <code>12, 15, 14, 10, 19</code>
       </p>
@@ -111,7 +111,7 @@ MAD = Σ|xᵢ − x̄| / n`}
         arithmetic mean of 14.
       </p>
 
-      <h2>Mean absolute deviation versus standard deviation</h2>
+      <h2 id="mean-absolute-deviation-versus-standard-deviation">Mean absolute deviation versus standard deviation</h2>
       <p>
         Both MAD and standard deviation describe spread around a center, but they
         treat deviations differently.
@@ -142,7 +142,7 @@ MAD = Σ|xᵢ − x̄| / n`}
         statistics; do not treat them as interchangeable.
       </p>
 
-      <h2>When MAD is useful</h2>
+      <h2 id="when-mad-is-useful">When MAD is useful</h2>
       <ul>
         <li>
           Teaching dispersion with a direct “average distance from the mean”
@@ -162,7 +162,7 @@ MAD = Σ|xᵢ − x̄| / n`}
         </li>
       </ul>
 
-      <h2>Limitations and interpretation</h2>
+      <h2 id="limitations-and-interpretation">Limitations and interpretation</h2>
       <ul>
         <li>
           MAD depends on the arithmetic mean. Outliers still affect the center and

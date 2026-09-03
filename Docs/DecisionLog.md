@@ -375,3 +375,35 @@ Chronological record of significant project decisions.
 **Decision:** Establish `lib/calculator-categories.ts` as the category registry. Indexable/public/sitemap category hubs require ≥3 published calculators by default; Statistics remains grandfathered at 2. Category existence never implies a public route. Sitemap category URLs are derived from indexability helpers — not a hard-coded category allowlist.
 
 **Rationale:** Enables multi-category growth without thin hubs or parallel publication lists. Dynamic `[category]` static export is deferred until a second hub is indexable because empty `generateStaticParams` is incompatible with `output: "export"`.
+
+---
+
+## 2026-09-03 — Phase 4.4 Calculator Page V2 composition
+
+**Decision:** Calculator detail pages are assembled from small server-rendered regions (`CalculatorPageShell` plus intro, trust strip, education nav, sources, related, last reviewed). Engines remain calculator-specific client islands. Related tools come from catalog `relatedCalculatorIds`; only published records receive `href`s.
+
+**Rationale:** Shared chrome without a flag-heavy mega-component, without a second calculator registry, and without hydrating educational content.
+
+---
+
+## 2026-09-03 — Single `main` landmark
+
+**Decision:** Root layout wraps page content in `<main id="main-content">` so the skip link and one-main landmark requirement share the same target.
+
+**Rationale:** The previous skip target was a `div`, which did not expose a `main` landmark.
+
+---
+
+## 2026-09-03 — Factual calculator trust strip
+
+**Decision:** Calculator trust copy is a semantic list of local calculation, formula/steps, sources, and methodology, plus a calculator-specific method note. No ratings, badges, counts, or unprovable accuracy claims.
+
+**Rationale:** Honesty constraint; MAD and Outlier/IQR need different disclosed conventions.
+
+---
+
+## 2026-09-03 — Public related calculators are published-only
+
+**Decision:** Public calculator detail pages show only related calculators that are currently published and navigable via the unified catalog (`isPublished` + public route). Preparation-only relatives are omitted from the Related calculators section.
+
+**Rationale:** In-preparation cards made published pages feel unfinished and added non-interactive weight without improving discovery.
